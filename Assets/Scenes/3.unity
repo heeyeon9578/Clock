@@ -1381,8 +1381,9 @@ MonoBehaviour:
   clock3: {fileID: 1139161241}
   hoursTransform: {fileID: 6570826960170533723}
   minuteTransform: {fileID: 6570826959136949464}
-  audioSource: {fileID: 1701028699}
-  audioSource2: {fileID: 1550347018}
+  audioSource:
+  - {fileID: 1701028699}
+  - {fileID: 1550347018}
 --- !u!4 &1139161240
 Transform:
   m_ObjectHideFlags: 0
@@ -1405,7 +1406,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139161238}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c639aab62111c1a4299502fe24c3e1d7, type: 3}
   m_Name: 

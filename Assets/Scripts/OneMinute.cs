@@ -23,7 +23,8 @@ public class OneMinute : MonoBehaviour
         {
             hoursTransform.localRotation = Quaternion.Euler(0f, 0f, -(++nowHour) * degreesPerHour);
         }
-        
+        Debug.Log("------------" + nowHour +":"+ nowMinute + "------------");
+
         StartCoroutine(checkOneMinute());
     }
 }

@@ -3,17 +3,31 @@ using UnityEngine;
 
 public class Clock2: MonoBehaviour
 {
-    const float degreesPerHour = 30f;
-    const float degreesPerMinute = 6f;
-    [SerializeField] protected Transform hoursTransform, minuteTransform;
-    [SerializeField] protected AudioSource audioSource; 
-    protected float nowHour=12f; protected float nowMinute=0f;
-    protected float alarmHour=13f; protected float alarmMinute=61f;
-    protected float oneHour = 120f; protected float oneMinute = 2f;
+    #region protecteds Properties
+    protected float degreesPerHour = 30f;
+    protected float degreesPerMinute = 6f;
+    protected float initalarmHour = 13f; 
+    protected float initalarmMinute = 61f;
+    protected float initnowHour = 12f;
+    protected float initnowMinute = 60f;
+    protected float nowHour=12f; 
+    protected float nowMinute=0f;
+    protected float alarmHour=13f; 
+    protected float alarmMinute=61f;
+    protected float oneHour = 120f; 
+    protected float oneMinute = 2f;
+    protected float xTransform = 0; 
+    protected float yTransform = 0;
+    
+    [SerializeField] protected Transform hoursTransform;
+    [SerializeField] protected Transform minuteTransform;
+    [SerializeField] protected AudioSource audioSource;
+    #endregion
 
-    private void Start()
+    private void Awake()
     {
         StartCoroutine(coMinute());
+
     }
     private void Update()
     {
@@ -25,13 +39,13 @@ public class Clock2: MonoBehaviour
         alarmHour = hour;
         alarmMinute = minute;
         Debug.Log("설정한 알람 시각은==="+alarmHour+":"+ alarmMinute);
-        if (alarmHour >= 12)
+        if (alarmHour >= initnowHour)
         {
-            alarmHour -= 12;
+            alarmHour -= initnowHour;
         }
-        if (alarmMinute >= 60)
+        if (alarmMinute >= initnowMinute)
         {
-            alarmMinute -= 60;
+            alarmMinute -= initnowMinute;
         }
     }
   
@@ -39,8 +53,8 @@ public class Clock2: MonoBehaviour
     {
         if (nowHour >= alarmHour && nowMinute >= alarmMinute)
         {
-            alarmHour = 13f;
-            alarmMinute = 61f;
+            alarmHour = initalarmHour;
+            alarmMinute = initalarmMinute;
             Debug.Log("알람 잘 끝남++++++++++++++ " + nowHour + ":" + nowMinute);
             audioSource.Play();
             
@@ -49,20 +63,21 @@ public class Clock2: MonoBehaviour
 
     public IEnumerator coMinute()
     {
-        if (nowMinute >= 60)
+        if (nowMinute >= initnowMinute)
         {
             nowHour++;
             
-            hoursTransform.localRotation = Quaternion.Euler(0f, 0f, -(nowHour) * degreesPerHour);
-            nowMinute -= 60;
+            hoursTransform.localRotation = Quaternion.Euler(xTransform, yTransform, -(nowHour) * degreesPerHour);
+            nowMinute -= initnowMinute;
         }
-        if (nowHour >= 12)
+        if (nowHour >= initnowHour)
         {
-            nowHour -= 12;
+            nowHour -= initnowHour;
         }
         yield return new WaitForSecondsRealtime(oneMinute); //1분
         nowMinute++;
-        minuteTransform.localRotation = Quaternion.Euler(0f, 0f, -(nowMinute) * degreesPerMinute);
+        minuteTransform.localRotation = Quaternion.Euler(xTransform, yTransform, -(nowMinute) * degreesPerMinute);
+        Debug.Log(nowHour+ ":" + nowMinute);    
         StartCoroutine(coMinute());
 
     }

@@ -20,21 +20,4 @@ public class Clock3 : Clock2
         oneHour = hour;
         oneMinute= minute;  
     }
-    /*
-        public Clock3(Transform hoursTransform, Transform minuteTransform, AudioSource audioSource) : base()
-        {
-            this.hoursTransform = hoursTransform;
-            this.minuteTransform = minuteTransform;
-            this.audioSource = audioSource;
-        }
-        //속도 및 오디오
-        public Clock3(Transform hoursTransform, Transform minuteTransform, AudioSource audioSource, float hour, float minute) : base()
-        {
-            this.hoursTransform = hoursTransform;
-            this.minuteTransform = minuteTransform;
-            this.audioSource = audioSource;
-            oneHour = hour;
-            oneMinute = minute;
-        }
-    */
 }
